@@ -12,6 +12,8 @@ interface Props {
   disabled: boolean
   id: string
   label: string
+  autoComplete: string
+  type: string
 }
 
 const TextField = (props: Partial<Props>) => {
@@ -19,7 +21,16 @@ const TextField = (props: Partial<Props>) => {
   return (
     <InputWrapper className={className}>
       <label>{label}</label>
-      <StyledInput disabled={disabled} id={id} name={name} onChange={onChange} placeholder={placeholder} value={value} />
+      <StyledInput
+        disabled={disabled}
+        id={id}
+        name={name}
+        onChange={onChange}
+        placeholder={placeholder}
+        value={value}
+        autoComplete={props.autoComplete}
+        type={props.type}
+      />
       {hintText && <Text>{hintText}</Text>}
       {error && <ErrorText>{error}</ErrorText>}
     </InputWrapper>
