@@ -21,7 +21,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const validPass = await bcrypt.compare(credentials.password, dbUser.password)
-    if (!validPass) return res.status(400).json({ type: 'error', message: 'Email or password incorrect' })
+    const salt = await bcrypt.genSalt()
+    const newPass = await bcrypt.hash(credentials.password, salt)
+    if (!validPass) return res.status(400).json({ type: 'error', message: 'Email or password incorrect', newPass })
 
     const user: UserType = {
       _id: dbUser._id,

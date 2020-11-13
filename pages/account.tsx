@@ -66,6 +66,7 @@ const Register = ({ newUser, setNewUser }: RegisterProps) => {
     })
       .then((response) => response.json())
       .then((json) => {
+        console.log(json)
         if (json.type === 'success') {
           jwt.verify(json.token, process.env.NEXT_PUBLIC_SECRET, (err, decode) => {
             if (!err) {

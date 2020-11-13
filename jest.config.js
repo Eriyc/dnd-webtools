@@ -2,7 +2,7 @@ module.exports = {
   roots: ['<rootDir>'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
   testPathIgnorePatterns: ['<rootDir>[/\\\\](node_modules|.next)[/\\\\]'],
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$'],
+  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$', '<rootDir>/node_modules/@babel', '<rootDir>/node_modules/@jest', 'signal-exit'],
   transform: {
     '^.+\\.(ts|tsx)$': 'babel-jest',
   },
