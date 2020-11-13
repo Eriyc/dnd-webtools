@@ -10,20 +10,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     // verify with joi
     const validation = loginBodySchema.validate(credentials)
-    if (validation.error) return res.status(403).json({ type: 'error', error: validation.error })
+    if (validation.error) return res.status(400).json({ type: 'validation', error: validation.error.details })
 
     // no errors, therefore we can connect to database
     await databaseConnection()
 
     const dbUser = await User.findOne({ email: credentials.email })
     if (!dbUser) {
-      return res.json({ type: 'error', error: 'Email or password error' })
+      return res.status(403).json({ type: 'error', error: 'Email or password incorrect' })
     }
 
     const validPass = await bcrypt.compare(credentials.password, dbUser.password)
-    const salt = await bcrypt.genSalt()
-    const newPass = await bcrypt.hash(credentials.password, salt)
-    if (!validPass) return res.status(400).json({ type: 'error', message: 'Email or password incorrect', newPass })
+    if (!validPass) return res.status(403).json({ type: 'error', error: 'Email or password incorrect' })
 
     const user: UserType = {
       _id: dbUser._id,

@@ -36,6 +36,8 @@ export interface UserType {
   username: DatabaseUserType['username']
   campaigns: DatabaseUserType['campaigns']
   account: DatabaseUserType['account']
+  errors?: { code: number; message: string }[]
+  loading?: boolean
 }
 
 let User: Model<DatabaseUserType, {}>

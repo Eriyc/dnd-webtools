@@ -12,6 +12,14 @@ const Button = styled.button`
     outline: none;
     filter: brightness(115%);
   }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    background-color: gray;
+  }
 `
 
 export default Button
