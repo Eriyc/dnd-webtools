@@ -2,14 +2,16 @@ import { string } from 'joi'
 import mongoose, { Document, Schema } from 'mongoose'
 import { UserType } from './user'
 
-export interface CampaignType extends Document {
+export interface DatabaseCampaignType extends Document {
+  _id: string
   name: string
-  owner: UserType['_id']
+  gamemaster: UserType['_id']
+  visited: Array<string>
 }
 
 const campaignSchema = new Schema({
   name: { type: string, required: true },
-  gamemaster: { type: Schema.Types.ObjectId, required: true },
+  gamemaster: { type: Schema.Types.ObjectId },
 })
 
-export default mongoose.model<CampaignType>('Campaign', campaignSchema)
+export default mongoose.model<DatabaseCampaignType>('Campaign', campaignSchema)

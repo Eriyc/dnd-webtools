@@ -46,6 +46,7 @@ export const StyledNavLink = styled(LinkElement)`
   background-color: red;
   list-style: none;
   padding: 4px 8px;
+  user-select: none;
 
   cursor: pointer;
 `
