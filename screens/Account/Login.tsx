@@ -1,4 +1,4 @@
-import { Button, TextField } from 'components'
+import { Button, Input, Stack } from '@chakra-ui/react'
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { authenticateUser } from 'src/store/features/user'
@@ -28,11 +28,31 @@ const Login = ({ loginUser, setLoginUser }: LoginProps) => {
   }
 
   return (
-    <form onSubmit={authenticate}>
-      <TextField label="Email" onChange={setEmail} value={loginUser.email} type="email" />
-      <TextField label="Password" onChange={setPassword} value={loginUser.password} type="password" />
-      <Button disabled={user.loading}>Login</Button>
-    </form>
+    <Stack as="form" onSubmit={authenticate} spacing={3} minW="16em" marginY="1em" id="login">
+      <Input
+        variant="flushed"
+        placeholder="Email"
+        id="email"
+        onChange={setEmail}
+        value={loginUser.email}
+        type="email"
+        autoComplete="email"
+        focusBorderColor="green.500"
+      />
+      <Input
+        variant="flushed"
+        placeholder="Password"
+        id="password"
+        onChange={setPassword}
+        value={loginUser.password}
+        type="password"
+        autoComplete="current-password"
+        focusBorderColor="green.500"
+      />
+      <Button isDisabled={user.loading} type="submit">
+        Login
+      </Button>
+    </Stack>
   )
 }
 

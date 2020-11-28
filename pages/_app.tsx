@@ -1,24 +1,32 @@
 // import App from "next/app";
-import { Topnav } from 'components'
-import AppContainer from 'components/AppContainer'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { ButtonStyle, Topnav } from 'components'
+
 import type { AppProps /*, AppContext */ } from 'next/app'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
 import store from 'src/store'
 
-import 'src/style.css'
+import 'src/style.scss'
+
+const config = {
+  useSystemColorMode: false,
+  initialColorMode: 'dark',
+}
+
+const customTheme = extendTheme({ config, components: { Button: ButtonStyle } })
 
 function RootComponent({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store.store}>
-      <PersistGate loading={null} persistor={store.persistor}>
-        <AppContainer>
+    <ChakraProvider theme={customTheme}>
+      <Provider store={store.store}>
+        <PersistGate loading={null} persistor={store.persistor}>
           <Topnav />
           <Component {...pageProps} />
-        </AppContainer>
-      </PersistGate>
-    </Provider>
+        </PersistGate>
+      </Provider>
+    </ChakraProvider>
   )
 }
 

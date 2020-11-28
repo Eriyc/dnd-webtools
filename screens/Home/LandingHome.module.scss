@@ -1,0 +1,9 @@
+.main {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 1170px;
+  padding: 16px;
+  background-color: #242424;
+}

@@ -1,4 +1,4 @@
-import { Button, TextField } from 'components'
+import { Button, Input, Stack } from '@chakra-ui/react'
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from 'src/store/features/user'
@@ -33,12 +33,43 @@ const Register = ({ newUser, setNewUser }: RegisterProps) => {
   }
 
   return (
-    <form onSubmit={finishSignUp}>
-      <TextField label="Email" id="email" autoComplete="new-email" onChange={setEmail} value={newUser.email} type="email" />
-      <TextField label="Username" id="new-username" autoComplete="new-username" onChange={setUsername} value={newUser.username} />
-      <TextField label="Password" id="new-password" autoComplete="new-password" onChange={setPassword} value={newUser.password} type="password" />
-      <Button disabled={user.loading}>Register</Button>
-    </form>
+    <Stack as="form" onSubmit={finishSignUp} minW="16em" spacing={3} marginY="1em" id="register">
+      <Input
+        label="Email"
+        placeholder="Email"
+        id="email"
+        autoComplete="new-email"
+        onChange={setEmail}
+        value={newUser.email}
+        type="email"
+        variant="flushed"
+        focusBorderColor="green.500"
+      />
+      <Input
+        label="Username"
+        id="new-username"
+        placeholder="Username"
+        autoComplete="new-username"
+        onChange={setUsername}
+        value={newUser.username}
+        variant="flushed"
+        focusBorderColor="green.500"
+      />
+      <Input
+        label="Password"
+        id="new-password"
+        placeholder="Password"
+        autoComplete="new-password"
+        onChange={setPassword}
+        value={newUser.password}
+        type="password"
+        variant="flushed"
+        focusBorderColor="green.500"
+      />
+      <Button disabled={user.loading} type="submit">
+        Register
+      </Button>
+    </Stack>
   )
 }
 

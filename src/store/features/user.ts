@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { UserType } from 'types/user'
-import jwt from 'jsonwebtoken'
+import jwtDecode from 'jwt-decode'
 
 export const authenticateUser = createAsyncThunk('user/login', async (credentials: { email: string; password: string }, thunkApi) => {
   try {
@@ -14,11 +14,8 @@ export const authenticateUser = createAsyncThunk('user/login', async (credential
       return thunkApi.rejectWithValue({ error: error.error, type: error.type })
     }
     const json = await response.json()
-    return jwt.verify(json.token, process.env.NEXT_PUBLIC_SECRET, (err, decode) => {
-      if (!err) {
-        return decode as UserType
-      } else return thunkApi.rejectWithValue(err)
-    })
+    const userObject = jwtDecode<UserType>(json.token)
+    return userObject
   } catch (error) {
     return thunkApi.rejectWithValue({ error: error.message })
   }
@@ -35,10 +32,8 @@ export const registerUser = createAsyncThunk('user/register', async (credentials
     return thunkApi.rejectWithValue({ error: error.error })
   }
   const json = await response.json()
-  return jwt.verify(json.token, process.env.NEXT_PUBLIC_SECRET, (err, decode) => {
-    if (err) return thunkApi.rejectWithValue(err)
-    else return decode
-  })
+  const userObject = jwtDecode<UserType>(json.token)
+  return userObject
 })
 
 const initialState: UserType = {
@@ -54,7 +49,12 @@ const initialState: UserType = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    signOutUser: (state) => {
+      state = initialState
+      return state
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(authenticateUser.pending, (state) => {
@@ -63,7 +63,7 @@ const userSlice = createSlice({
         return state
       })
       .addCase(authenticateUser.fulfilled, (state, action) => {
-        state = { ...((action.payload as unknown) as UserType) }
+        state = { ...action.payload }
         state.loading = false
         return state
       })
@@ -74,5 +74,7 @@ const userSlice = createSlice({
       })
   },
 })
+
+export const { signOutUser } = userSlice.actions
 
 export default userSlice.reducer
