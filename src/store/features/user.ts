@@ -44,6 +44,7 @@ const initialState: UserType = {
   campaigns: [],
   errors: null,
   loading: false,
+  characters: [],
 }
 
 const userSlice = createSlice({

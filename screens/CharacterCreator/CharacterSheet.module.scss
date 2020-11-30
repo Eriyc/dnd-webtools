@@ -1,0 +1,21 @@
+.abilityBox {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  background-color: #323232;
+  margin: 10px;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+
+  & input {
+    width: 60%;
+    height: 35%;
+    border-radius: 4px;
+    color: black;
+    text-align: center;
+    &:focus {
+      outline: none;
+    }
+  }
+}
