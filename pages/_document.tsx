@@ -32,6 +32,8 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="stylesheet" href="https://use.typekit.net/lhc5cxk.css" as="font" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300&display=swap" rel="stylesheet" />
         </Head>
         <body>
           <Main />

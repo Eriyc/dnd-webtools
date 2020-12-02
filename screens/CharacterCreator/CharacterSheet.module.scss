@@ -75,10 +75,12 @@
 .skill {
   background-color: #323232;
   list-style: none;
-  width: 300px;
+  width: 212px;
   height: calc(480px / 18);
   padding: 3px;
-
+  font-family: Signika, sans-serif;
+  font-size: 13px;
+  text-transform: capitalize;
   display: flex;
   justify-content: flex-start;
 

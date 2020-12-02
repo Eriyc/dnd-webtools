@@ -36,8 +36,8 @@ const AbilityView = (props: Ability & AbilityProps) => {
 const SkillView = (props: Skill) => {
   const character = useSelector((state: RootState) => state.character)
   const parentIndex = character.abilities.findIndex((a) => a.name === props.parent)
-  const skillMod = character.abilities[parentIndex].mod
-  const passive = 10 + props.bonus
+  const skillMod: number = character.abilities[parentIndex].mod + (props.proficiency === 'proficient' ? 2 : props.proficiency === 'expertise' ? 4 : 0)
+  const passive = 10 + skillMod
 
   return (
     <li className={s.skill}>
@@ -45,10 +45,10 @@ const SkillView = (props: Skill) => {
       <p className={s.skillName}>{props.name}</p>
       <p className={s.skillParent}>{props.parent.substring(0, 3)}</p>
       <p className={s.skillBonus}>
-        {skillMod + props.bonus > 0 && '+'}
+        {skillMod + props.bonus >= 0 && '+'}
         {skillMod + props.bonus}
       </p>
-      <p className={s.skillPassive}>{passive}</p>
+      <p className={s.skillPassive}>({passive})</p>
     </li>
   )
 }
@@ -57,8 +57,7 @@ export const CharacterSheet = () => {
   const character = useSelector((state: RootState) => state.character)
   const dispatch = useDispatch()
 
-  const onAbilityChange = (name: AbilityName, value: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(name, value)
+  const onAbilityChange = (name: AbilityName, value: number, _e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateAbilityScore({ ability: name, value }))
   }
 
@@ -70,10 +69,11 @@ export const CharacterSheet = () => {
         ))}
       </section>
       <ul className={s.skills}>
-        {character.skills.map((skill, i) => (
+        {character.skills.map((skill) => (
           <SkillView key={skill.name} {...skill} />
         ))}
       </ul>
+      <section className={s.attributes}></section>
     </main>
   )
 }

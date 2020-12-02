@@ -24,8 +24,6 @@ const Page: NextPage = () => {
     password: '',
   })
 
-  console.log(user)
-
   return user._id ? (
     <Overview />
   ) : login ? (

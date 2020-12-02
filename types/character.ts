@@ -1,11 +1,11 @@
-import mongoose, { Document, Model, Schema } from 'mongoose'
+import { Schema } from 'mongoose'
 
 type CharacterClass = {
   name: string
   id: number
 }
 
-const CharacterSchema = new Schema({
+export const CharacterSchema = new Schema({
   name: { type: String, required: true },
   class: { type: Object, required: true },
 })

@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { CampaignType } from 'types/campaign'
 
 const initialState: CampaignType = {
@@ -12,7 +12,6 @@ const campaignSlice = createSlice({
   initialState,
   name: 'campaign',
   reducers: {},
-  extraReducers: (builder) => {},
 })
 
 export default campaignSlice.reducer

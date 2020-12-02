@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Ability, AbilityName, CharacterCreatorState, Skill, SkillName } from 'types/character'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Ability, AbilityName, CharacterCreatorState, Skill } from 'types/character'
 
 const calcValue = (score: number, additional: number) => score + additional
 
@@ -70,7 +70,6 @@ const campaignSlice = createSlice({
       return state
     },
   },
-  extraReducers: () => {},
 })
 
 export const { updateAbilityScore } = campaignSlice.actions
