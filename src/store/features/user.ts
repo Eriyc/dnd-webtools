@@ -33,6 +33,7 @@ export const registerUser = createAsyncThunk('user/register', async (credentials
   }
   const json = await response.json()
   const userObject = jwtDecode<UserType>(json.token)
+  console.log(userObject)
   return userObject
 })
 

@@ -1,5 +1,5 @@
 import mongoose, { Document, Model, Schema } from 'mongoose'
-import { string, object } from 'joi'
+import joi from 'joi'
 import { DatabaseCampaignType } from './campaign'
 
 const UserSchema: Schema = new Schema({
@@ -9,18 +9,17 @@ const UserSchema: Schema = new Schema({
   campaigns: { type: Array, required: true },
   characters: { type: Array, required: true },
   account: { type: String, required: true },
-  _id: { type: Schema.Types.ObjectId },
 })
 
-export const registerBodySchema = object({
-  username: string().min(4).max(25).required(),
-  email: string().min(5).max(255).required().email(),
-  password: string().min(6).required(),
+export const registerBodySchema = joi.object({
+  username: joi.string().min(4).max(25).required(),
+  email: joi.string().min(5).max(255).required().email(),
+  password: joi.string().min(6).required(),
 })
 
-export const loginBodySchema = object({
-  email: string().min(5).max(255).required().email(),
-  password: string().min(6).required(),
+export const loginBodySchema = joi.object({
+  email: joi.string().min(5).max(255).required().email(),
+  password: joi.string().min(6).required(),
 })
 
 export interface DatabaseUserType extends Document {

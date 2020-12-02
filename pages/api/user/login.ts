@@ -29,6 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       campaigns: dbUser.campaigns,
       email: dbUser.email,
       username: dbUser.username,
+      characters: dbUser.characters,
     }
 
     // Create and assign JSON Web Token

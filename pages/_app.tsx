@@ -3,6 +3,7 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { ButtonStyle, Topnav } from 'components'
 
 import type { AppProps /*, AppContext */ } from 'next/app'
+import Head from 'next/head'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 

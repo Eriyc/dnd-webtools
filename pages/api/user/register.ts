@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const data = JSON.parse(req.body) as { username: string; email: string; password: string }
 
     const emailExists = await User.findOne({ email: data.email })
-    if (emailExists) return res.status(400).json({ type: 'error', error: 'Email already exists!' })
+    if (emailExists) return res.status(200).json({ type: 'error', error: 'Email already exists!' })
 
     // Hash password
     const salt = await bcrypt.genSalt(10)
@@ -26,6 +26,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       campaigns: [],
       email: data.email,
       username: data.username,
+      characters: [],
     }
 
     const user = new User({
@@ -42,6 +43,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         campaigns: savedUser.campaigns,
         email: savedUser.email,
         username: savedUser.username,
+        characters: savedUser.characters,
       }
 
       // user saved, return jsonwebtoken to log them in
@@ -50,7 +52,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       res.status(200).json({ type: 'success', token: token, timestamp: Date.now() })
     } catch (error) {
-      res.status(500).json({ type: 'error', errors: 'Internal server error', timestamp: Date.now() })
+      res.status(200).json({ type: 'error', errors: 'Internal server error', timestamp: Date.now() })
     }
   }
 }

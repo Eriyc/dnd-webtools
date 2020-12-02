@@ -1,21 +1,105 @@
+.sheetBody {
+  display: flex;
+}
+.abilities {
+  flex: 0 0 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .abilityBox {
+  font-family: 'modesto-condensed', 'Palatino Linotype', serif;
+
   display: inline-block;
-  height: 100px;
   width: 100px;
   background-color: #323232;
-  margin: 10px;
   text-align: center;
   user-select: none;
-  cursor: pointer;
+
+  & h4 {
+    display: block;
+
+    height: 18px;
+    line-height: 16px;
+    margin: 4px 8px 2px;
+    white-space: nowrap;
+    border-bottom: 1px solid #c9c7b8;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0;
+    cursor: pointer;
+  }
 
   & input {
-    width: 60%;
-    height: 35%;
+    width: 36px;
+    height: 30px;
     border-radius: 4px;
-    color: black;
+    color: white;
     text-align: center;
     &:focus {
       outline: none;
     }
+    background-color: transparent;
+
+    &:hover {
+      outline: 1px black solid;
+    }
+  }
+  & .modifier {
+    display: flex;
+    justify-content: space-between;
+    height: 24px;
+
+    & span {
+      border-top: 2px groove #eeede0;
+      flex: 0 0 24px;
+      cursor: pointer;
+      height: 22px;
+      width: 22px;
+    }
+
+    & .mod {
+      border-right: 2px groove #eeede0;
+    }
+    & .save {
+      border-left: 2px groove #eeede0;
+    }
+  }
+}
+
+.skills {
+  flex: 0 0 212px;
+  margin: 0 5px 0;
+}
+.skill {
+  background-color: #323232;
+  list-style: none;
+  width: 300px;
+  height: calc(480px / 18);
+  padding: 3px;
+
+  display: flex;
+  justify-content: flex-start;
+
+  .skillName {
+    flex: 1px;
+  }
+
+  .skillParent {
+    flex: 0 0 26px;
+    text-transform: capitalize;
+  }
+
+  .skillBonus {
+    flex: 0 0 20px;
+  }
+
+  .skillPassive {
+    flex: 0 0 26px;
+  }
+
+  &:nth-child(even) {
+    background-color: #424242;
   }
 }
